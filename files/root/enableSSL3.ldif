@@ -1,0 +1,4 @@
+dn: cn=encryption,cn=config
+changetype: modify
+replace: sslVersionMin
+sslVersionMin: TLS1.2

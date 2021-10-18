@@ -1,0 +1,4 @@
+dn: cn=user,cn=defaultObjectClassesContainer,ou=1.1,ou=Admin,ou=Global Preferences,ou=ncsa.illinois.edu,o=NetscapeRoot
+changetype: modify
+add: nsDefaultObjectClass
+nsDefaultObjectClass: inetUser

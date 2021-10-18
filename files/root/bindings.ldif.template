@@ -1,0 +1,8 @@
+dn: cn=config
+changetype: modify
+add: nsslapd-securelistenhost
+nsslapd-securelistenhost: HOST
+-
+add: nsslapd-listenhost
+nsslapd-listenhost: 127.0.0.1
+

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+db2ldif -q -s "dc=ncsa,dc=illinois,dc=edu" 2>&1 | egrep -v 'Exported ldif file|Backend Instance|userRoot|/var/lib/dirsrv/slapd-ldap/ldif/ldap-ncsa-|All database threads now stopped'

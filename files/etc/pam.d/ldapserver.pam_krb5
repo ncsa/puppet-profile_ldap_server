@@ -1,0 +1,7 @@
+auth        sufficient    pam_krb5.so no_user_check
+account     sufficient    pam_krb5.so no_user_check
+#This isn't supported syntax of the redhat pam module and will need rework if we need this feature
+# This now works using the module from http://www.eyrie.org/~eagle/software/pam-krb5/
+#auth        sufficient    /usr/local/lib/security/pam_krb5.so force_alt_auth alt_auth_map=%s/wiki
+#account     sufficient    /usr/local/lib/security/pam_krb5.so force_alt_auth alt_auth_map=%s/wiki
+account     required     pam_nologin.so

@@ -1,0 +1,20 @@
+[General] 
+SuiteSpotUserID= nobody 
+SuiteSpotGroup= nobody 
+AdminDomain= ncsa.illinois.edu 
+ConfigDirectoryAdminID= admin 
+ConfigDirectoryAdminPwd= admin 
+
+[slapd] 
+SlapdConfigForMC= Yes 
+UseExistingMC= 0 
+ServerPort= 389 
+ServerIdentifier= ncsa-ldap 
+Suffix= dc=ncsa,dc=illinois,dc=edu  
+RootDN= cn=Directory Manager 
+AddSampleEntries= No
+ConfigFile = enableInetUser.ldif
+ConfigFile = enableMemberOf.ldif
+ConfigFile = setToUniqueMember.ldif
+ConfigFile = enablePamPassthrough.ldif
+ConfigFile = limits.ldif

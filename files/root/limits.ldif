@@ -1,0 +1,4 @@
+dn: cn=config,cn=ldbm database,cn=plugins,cn=config
+changetype: modify
+replace: nsslapd-lookthroughlimit
+nsslapd-lookthroughlimit: -1

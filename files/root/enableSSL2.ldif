@@ -1,0 +1,7 @@
+dn: cn=config
+changetype: modify
+add: nsslapd-security
+nsslapd-security: on
+-
+replace: nsslapd-ssl-check-hostname
+nsslapd-ssl-check-hostname: off

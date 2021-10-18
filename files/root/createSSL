@@ -1,0 +1,10 @@
+#!/bin/bash
+umask 0027
+cp /root/ldap.RootDNPwd /etc/dirsrv/slapd-ncsa-ldap/pwdfile.txt
+cd /etc/dirsrv/slapd-ncsa-ldap/
+head -c 40 /dev/random > noise.dat
+mv cert8.db cert8.db.`date +%F`
+mv key3.db key3.db.`date +%F`
+certutil -N -d . -f pwdfile.txt
+certutil -R -d . -s "CN=`hostname`,dc=ncsa,dc=illinois,dc=edu" -g 4096  -o cert.req -a -f pwdfile.txt -z noise.dat
+

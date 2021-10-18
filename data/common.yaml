@@ -1,0 +1,31 @@
+---
+profile_ldap_server::firewall::allowsubnets:
+  "CILogonreplica": "192.249.7.62/32"
+  "lists.illinois.edu": "192.17.172.63/32"
+  "lsst1": "139.229.126.0/24"
+  "lsst2": "139.229.136.0/24"
+  "lsst3": "140.252.32.0/23"
+  "ncsanet.priv": "172.24.0.0/13"
+  "old_privncsa.net": "10.142.0.0/16"
+  "pub_ncsanet": "141.142.0.0/16"
+  "sympa.cites.illinois.edu": "192.17.172.58/32"
+  "uofinet.priv": "172.16.24.0/13"
+profile_ldap_server::firewall::badsubnets:
+  "ISL 1": "141.142.143.68"
+  "ISL 2": "141.142.143.79"
+  "ISL 3": "141.142.143.80"
+
+profile_ldap_server::packages_present:
+  - "389-admin"
+  - "389-adminutil"
+  - "389-ds-base"
+  - "389-ds-base-libs"
+  - "bind-utils"
+  - "bzip2"
+  - "cracklib-devel"
+  - "mlocate"
+  - "net-tools"
+  - "tcp_wrappers"
+profile_ldap_server::packages_absent:
+  - "xinetd"
+profile_ldap_server::pam_authtype: "pam_krb5"

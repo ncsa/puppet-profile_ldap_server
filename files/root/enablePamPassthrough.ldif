@@ -1,0 +1,4 @@
+dn: cn=PAM Pass Through Auth,cn=plugins,cn=config
+changetype: modify
+replace: nsslapd-pluginEnabled
+nsslapd-pluginEnabled: on
