@@ -15,17 +15,16 @@ profile_ldap_server::firewall::badsubnets:
   "ISL 2": "141.142.143.79"
   "ISL 3": "141.142.143.80"
 
-profile_ldap_server::packages_present:
+profile_ldap_server::services::packages_present:
   - "389-admin"
   - "389-adminutil"
   - "389-ds-base"
   - "389-ds-base-libs"
   - "bind-utils"
-  - "bzip2"
   - "cracklib-devel"
   - "mlocate"
-  - "net-tools"
+  - "pam_krb5"
   - "tcp_wrappers"
-profile_ldap_server::packages_absent:
+profile_ldap_server::services::packages_absent:
   - "xinetd"
-profile_ldap_server::pam_authtype: "pam_krb5"
+profile_ldap_server::services::pam_authtype: "pam_krb5"

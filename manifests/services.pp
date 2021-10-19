@@ -64,11 +64,6 @@ class profile_ldap_server::services (
     mode   => '0644',
   }
 
-  $krbpkgs = [
-    'pam_krb5',
-  ]
-  ensure_packages( $krbpkgs )
-
   file { '/etc/pam.d/ldapserver.new':
     source => "puppet:///modules/${module_name}/etc/pam.d/ldapserver.${pam_authtype}",
     mode   => '0644',

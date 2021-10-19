@@ -4,34 +4,39 @@
 #   include profile_ldap_server::crontab
 class profile_ldap_server::crontab {
 
-# LOG NUMBER OF LDAP CLIENT CONNECTIONS TO SYSLOG
-# */5 * * * * ((echo -n 'current ldap connections: ' && netstat -an | grep 636 | awk '{ print $5 }' | awk -F\: '{ print $1 }' | wc -l) | logger -t ns-slapd)
+  File {
+    ensure => 'file',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0700',
+  }
+
+
+  file { '/root/cron_scripts/ldap_connections.sh':
+    source => "puppet:///modules/${module_name}/root/cron_scripts/ldap_connections.sh",
+  }
   cron { 'ldap_connections':
-    command     => '((echo -n \'current ldap connections: \' && netstat -an | grep 636 | awk \'{ print \$5 }\' | awk -F\\\: \'{ print \$1 }\' | wc -l) | logger -t ns-slapd)',
+    command     => '/root/cron_scripts/ldap_connections.sh',
     user        => 'root',
     minute      => '*/5',
     environment => ['SHELL=/bin/sh', 'MAILTO=ldap-admin@lists.ncsa.illinois.edu'],
   }
 
+  file { '/root/cron_scripts/ldap-sync.sh':
+    source => "puppet:///modules/${module_name}/root/cron_scripts/ldap-sync.sh",
+  }
   cron { 'ldap-sync':
-    command     => 'sleep \$((RANDOM \\\% 5))m && test `ps auxxxxxww | grep \'ldap-sync\' | grep -v grep | wc -l` -lt 2 && python /root/ldap-sync.py --clone-master | logger -t \'ldap-sync\' || logger -t \'ldap-sync\' \'WARN - sync skipped (possibly another sync in progress)\'',
+    command     => '/root/cron_scripts/ldap-sync.sh',
     user        => 'root',
     minute      => '*/20',
     environment => ['SHELL=/bin/sh'],
   }
 
-  file { '/root/scripts/rotate-ldap-logs.sh':
-    ensure  => 'file',
-    source  => "puppet:///modules/${module_name}/root/scripts/rotate-ldap-logs.sh",
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0700',
-    require => [
-      File['/root/scripts'],
-    ],
+  file { '/root/cron_scripts/rotate-ldap-logs.sh':
+    source => "puppet:///modules/${module_name}/root/cron_scripts/rotate-ldap-logs.sh",
   }
   cron { 'Rotate LDAP syslog scripts':
-    command => '/root/scripts/rotate-ldap-logs.sh',
+    command => '/root/cron_scripts/rotate-ldap-logs.sh',
     user    => 'root',
     minute  => [
       15,
@@ -39,7 +44,7 @@ class profile_ldap_server::crontab {
       45,
     ],
     require => [
-      File['/root/scripts/rotate-ldap-logs.sh'],
+      File['/root/cron_scripts/rotate-ldap-logs.sh'],
     ],
   }
 
