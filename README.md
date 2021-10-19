@@ -16,6 +16,7 @@ include profile_ldap_server
 
 ## Dependencies
 
+- [puppet/epel](https://forge.puppet.com/modules/puppet/epel)
 - [puppetlabs/firewall](https://forge.puppet.com/modules/puppetlabs/firewall)
 
 ## Reference
