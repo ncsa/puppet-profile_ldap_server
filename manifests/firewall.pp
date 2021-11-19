@@ -13,22 +13,22 @@ class profile_ldap_server::firewall (
   Hash $badsubnets,
 ) {
 
+  $badsubnets.each | $location, $source_cidr |
+  {
+    firewall { "200 BLOCK BAD ACTORS FROM ${location}":
+      proto  => 'all',
+      source => $source_cidr,
+      action => 'drop',
+    }
+  }
+
   $allowsubnets.each | $location, $source_cidr |
   {
-    firewall { "1000 ALLOW LDAP FROM ${location}":
+    firewall { "250 ALLOW LDAP FROM ${location}":
       proto  => tcp,
       dport  => '636',
       source => $source_cidr,
       action => accept,
-    }
-  }
-
-  $badsubnets.each | $location, $source_cidr |
-  {
-    firewall { "1100 BLOCK BAD ACTORS FROM ${location}":
-      proto  => 'all',
-      source => $source_cidr,
-      action => 'drop',
     }
   }
 
