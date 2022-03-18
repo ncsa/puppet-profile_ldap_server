@@ -22,15 +22,15 @@ class profile_ldap_server::crontab {
     environment => ['SHELL=/bin/sh', 'MAILTO=ldap-admin@lists.ncsa.illinois.edu'],
   }
 
-  file { '/root/cron_scripts/ldap-sync.sh':
-    source => "puppet:///modules/${module_name}/root/cron_scripts/ldap-sync.sh",
-  }
-  cron { 'ldap-sync':
-    command     => '/root/cron_scripts/ldap-sync.sh',
-    user        => 'root',
-    minute      => '*/20',
-    environment => ['SHELL=/bin/sh'],
-  }
+#  file { '/root/cron_scripts/ldap-sync.sh':
+#    source => "puppet:///modules/${module_name}/root/cron_scripts/ldap-sync.sh",
+#  }
+#  cron { 'ldap-sync':
+#    command     => '/root/cron_scripts/ldap-sync.sh',
+#    user        => 'root',
+#    minute      => '*/20',
+#    environment => ['SHELL=/bin/sh'],
+#  }
 
   file { '/root/cron_scripts/rotate-ldap-logs.sh':
     source => "puppet:///modules/${module_name}/root/cron_scripts/rotate-ldap-logs.sh",
