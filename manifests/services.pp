@@ -79,6 +79,11 @@ class profile_ldap_server::services (
     target => '/etc/cron.daily/logrotate',
   }
 
+  file { '/etc/dirsrv/schema/95ncsa-resources.ldif':
+    source => "puppet:///modules/${module_name}/etc/dirsrv/schema/95ncsa-resources.ldif",
+    mode   => '0444',
+  }
+
   file { '/etc/dirsrv/schema/98voperson.ldif':
     source => "puppet:///modules/${module_name}/etc/dirsrv/schema/98voperson.ldif",
     mode   => '0444',
