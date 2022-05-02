@@ -26,18 +26,6 @@ class profile_ldap_server::services (
       enable => true,
   }
 
-#NOTE:  This class' configuration of hosts.allow and hosts.deny could conflict with other
-#       definitions for them in other classes.
-  file { '/etc/hosts.allow':
-    source => "puppet:///modules/${module_name}/etc/hosts.allow",
-    mode   => '0644',
-  }
-
-  file { '/etc/hosts.deny':
-    source => "puppet:///modules/${module_name}/etc/hosts.deny",
-    mode   => '0644',
-  }
-
   file { '/etc/security/limits.conf':
     source => "puppet:///modules/${module_name}/etc/security/limits.conf",
     mode   => '0644',
@@ -52,12 +40,6 @@ class profile_ldap_server::services (
     source => "puppet:///modules/${module_name}/etc/rsyslog.d/dirsrv.conf",
     mode   => '0644',
   }
-
-# MOVED TO common::syslog
-#  file { '/etc/logrotate.conf':
-#    source => "puppet:///modules/${module_name}/etc/logrotate.conf",
-#    mode => '644',
-#  }
 
   file { '/etc/logrotate.d/syslog':
     source => "puppet:///modules/${module_name}/etc/logrotate.d/syslog",
