@@ -1,19 +1,17 @@
 ---
-profile_ldap_server::firewall::allowsubnets:
+profile_ldap_server::firewall::badsubnets:
+  "ISL 1": "141.142.143.68"
+  "ISL 2": "141.142.143.79"
+  "ISL 3": "141.142.143.80"
+profile_ldap_server::firewall::clientsubnets:
   "CILogonreplica": "192.249.7.62/32"
   "lists.illinois.edu": "192.17.172.63/32"
-  "lsst1": "139.229.126.0/24"
-  "lsst2": "139.229.136.0/24"
-  "lsst3": "140.252.32.0/23"
   "ncsanet.priv": "172.24.0.0/13"
   "old_privncsa.net": "10.142.0.0/16"
   "pub_ncsanet": "141.142.0.0/16"
   "sympa.cites.illinois.edu": "192.17.172.58/32"
   "uofinet.priv": "172.16.24.0/13"
-profile_ldap_server::firewall::badsubnets:
-  "ISL 1": "141.142.143.68"
-  "ISL 2": "141.142.143.79"
-  "ISL 3": "141.142.143.80"
+profile_ldap_server::firewall::replsubnets: {}
 
 profile_ldap_server::services::packages_present:
   - "389-admin"
