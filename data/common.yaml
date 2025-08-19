@@ -2,9 +2,6 @@
 profile_ldap_server::firewall::allowsubnets:
   "CILogonreplica": "192.249.7.62/32"
   "lists.illinois.edu": "192.17.172.63/32"
-  "lsst1": "139.229.126.0/24"
-  "lsst2": "139.229.136.0/24"
-  "lsst3": "140.252.32.0/23"
   "ncsanet.priv": "172.24.0.0/13"
   "old_privncsa.net": "10.142.0.0/16"
   "pub_ncsanet": "141.142.0.0/16"
