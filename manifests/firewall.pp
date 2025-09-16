@@ -3,27 +3,19 @@
 # @param clientsubnets
 #   List of subnets that are allowed to connect to LDAP port 636
 #
-# @param badsubnets
-#   List of subnets that are probitited to connect to LDAP services
-#
 # @param replsubnets
 #   List of subnets that are allowed to connect to LDAP port 389
+#
+# @param badsubnets
+#   List of subnets that are probitited to connect to LDAP services
 #
 # @example
 #   include profile_ldap_server::firewall
 class profile_ldap_server::firewall (
   Hash $clientsubnets,
   Hash $replsubnets,
+  Hash $badsubnets,
 ) {
-
-  $badsubnets.each | $location, $source_cidr |
-  {
-    firewall { "200 BLOCK BAD ACTORS FROM ${location}":
-      proto  => 'all',
-      source => $source_cidr,
-      action => 'drop',
-    }
-  }
 
   $clientsubnets.each | $location, $source_cidr |
   {
@@ -42,6 +34,15 @@ class profile_ldap_server::firewall (
       dport  => '389',
       source => $source_cidr,
       action => accept,
+    }
+  }
+
+  $badsubnets.each | $location, $source_cidr |
+  {
+    firewall { "200 BLOCK BAD ACTORS FROM ${location}":
+      proto  => 'all',
+      source => $source_cidr,
+      action => 'drop',
     }
   }
 
