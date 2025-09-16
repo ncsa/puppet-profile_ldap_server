@@ -1,16 +1,19 @@
 # @summary Configure firewall rules for LDAP services
 #
-# @param allowsubnets
-#   List of subnets that are allowed to connect to LDAP services
+# @param clientsubnets
+#   List of subnets that are allowed to connect to LDAP port 636
 #
 # @param badsubnets
 #   List of subnets that are probitited to connect to LDAP services
 #
+# @param replsubnets
+#   List of subnets that are allowed to connect to LDAP port 389
+#
 # @example
 #   include profile_ldap_server::firewall
 class profile_ldap_server::firewall (
-  Hash $allowsubnets,
-  Hash $badsubnets,
+  Hash $clientsubnets,
+  Hash $replsubnets,
 ) {
 
   $badsubnets.each | $location, $source_cidr |
@@ -22,11 +25,21 @@ class profile_ldap_server::firewall (
     }
   }
 
-  $allowsubnets.each | $location, $source_cidr |
+  $clientsubnets.each | $location, $source_cidr |
+  {
+    firewall { "250 ALLOW LDAPS FROM ${location}":
+      proto  => tcp,
+      dport  => '636',
+      source => $source_cidr,
+      action => accept,
+    }
+  }
+
+  $replsubnets.each | $location, $source_cidr |
   {
     firewall { "250 ALLOW LDAP FROM ${location}":
       proto  => tcp,
-      dport  => '636',
+      dport  => '389',
       source => $source_cidr,
       action => accept,
     }
