@@ -10,6 +10,7 @@
 #   include profile_ldap_server::firewall
 class profile_ldap_server::firewall (
   Hash $allowsubnets,
+  Hash $allownagios,
   Hash $badsubnets,
 ) {
 
@@ -27,6 +28,16 @@ class profile_ldap_server::firewall (
     firewall { "250 ALLOW LDAP FROM ${location}":
       proto  => tcp,
       dport  => '636',
+      source => $source_cidr,
+      action => accept,
+    }
+  }
+
+  $allownagios.each | $location, $source_cidr |
+  {
+    firewall { "300 ALLOW NAGIOS FROM ${location}":
+      proto  => tcp,
+      dport  => '5666',
       source => $source_cidr,
       action => accept,
     }
