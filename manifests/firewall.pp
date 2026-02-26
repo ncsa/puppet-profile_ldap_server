@@ -35,12 +35,19 @@ class profile_ldap_server::firewall (
 
   $allownagios.each | $location, $source_cidr |
   {
-    firewall { "300 ALLOW NAGIOS FROM ${location}":
+    firewall { "300 ALLOW NRPE FROM ${location}":
       proto  => tcp,
       dport  => '5666',
       source => $source_cidr,
       action => accept,
     }
+
+    firewall { "300 ALLOW SSH FROM ${location}":
+      proto  => tcp,
+      dport  => '22',
+      source => $source_cidr,
+      action => accept,
+    } 
   }
 
 }
