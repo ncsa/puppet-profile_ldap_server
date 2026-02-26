@@ -1,6 +1,13 @@
 ---
 profile_ldap_server::firewall::allowsubnets:
+  "hydro.storage": "172.28.19.0/24"
+  "hydro.mgmt": "172.28.20.0/24"
   "CILogonreplica": "192.249.7.62/32"
+  "CILogon_AWS_1": "13.58.194.96/32"
+  "CILogon_AWS_2": "18.219.46.11/32"
+  "CILogon_AWS_3": "18.224.193.103/32"
+  "CILogon_AWS_4": "18.220.126.91/32"
+  "CILogon_AWS_5": "3.130.30.146/32"
   "lists.illinois.edu": "192.17.172.63/32"
   "lsst1": "139.229.126.0/24"
   "lsst2": "139.229.136.0/24"

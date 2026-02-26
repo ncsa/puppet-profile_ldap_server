@@ -25,7 +25,7 @@ class profile_ldap_server::firewall (
 
   $allowsubnets.each | $location, $source_cidr |
   {
-    firewall { "250 ALLOW LDAP FROM ${location}":
+    firewall { "250 ALLOW LDAPS FROM ${location}":
       proto  => tcp,
       dport  => '636',
       source => $source_cidr,
